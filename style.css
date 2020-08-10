@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.dot {
+  display: flex;
+  background-color: royalblue;
+  text-align: center;
+  justify-content: center;
+  margin: 0.5px;
+}
+@media all and (orientation: landscape) {
+  #board {
+    width: 100vh;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(20, 5vh);
+    grid-template-rows: repeat(20, 5vh);
+    background-color: red;
+    margin: auto;
+  }
+}
+@media all and (orientation: portrait) {
+  #board {
+    width: 100vw;
+    height: 100vw;
+    display: grid;
+    grid-template-columns: repeat(20, 5vw);
+    grid-template-rows: repeat(20, 5vw);
+    background-color: red;
+  }
+}
