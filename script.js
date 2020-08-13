@@ -20,8 +20,8 @@ function game() {
     },
     set isOver(val) {
       if (!this.over && val) {
-        this.over = val;
         clearInterval(snakeTimer);
+        this.over = val;
         alert("GAME OVER");
       } else this.over = val;
     },
@@ -48,7 +48,7 @@ function game() {
   }, 500);
 }
 function move(gameState) {
-  removeColors();
+  //removeColors();
   snakeIds.forEach(function (part, index) {
     //switching direction
     changeDirection(part, index);
@@ -59,12 +59,12 @@ function move(gameState) {
       (part.id % 20 == 19 && part.nextMove == "right") ||
       (part.id % 20 == 00 && part.nextMove == "left") ||
       (part.id >= 0 && part.id <= 19 && part.nextMove == "up") ||
-      (part.id >= 380 && part.id <= 399 && part.nextMove == "down") ||
-      isAboutToCrash()
+      (part.id >= 380 && part.id <= 399 && part.nextMove == "down")
     ) {
       gameState.isOver = true;
       //console.log("restart");
     } else {
+      removeColors();
       switch (part.nextMove) {
         case "right":
           this[index].id++;
@@ -79,7 +79,11 @@ function move(gameState) {
           this[index].id += 20;
           break;
       }
-      if (index == 0 && part.id == gameState.fruitId) gameState.fruitId = null;
+      if (isAboutToCrash()) gameState.isOver = true;
+      if (index == 0 && part.id == gameState.fruitId) {
+        gameState.fruitId = null;
+        tailLengthen();
+      }
       //console.log("iteracja " + part);
     }
     //if (index == snakeIds.length - 1) breakPoints.shift();
@@ -137,20 +141,20 @@ function isAboutToCrash() {
   const head = snakeIds[0];
   switch (head.nextMove) {
     case "right":
-      for (let i = 1; i < snakeIds.length - 1; i++)
-        if (head.id + 1 == snakeIds[i].id) return true;
+      for (let i = 1; i < snakeIds.length; i++)
+        if (head.id == snakeIds[i].id) return true;
       return false;
     case "left":
       for (let i = 1; i < snakeIds.length - 1; i++)
-        if (head.id - 1 == snakeIds[i].id) return true;
+        if (head.id == snakeIds[i].id) return true;
       return false;
     case "up":
       for (let i = 1; i < snakeIds.length - 1; i++)
-        if (head.id - 20 == snakeIds[i].id) return true;
+        if (head.id == snakeIds[i].id) return true;
       return false;
     case "down":
       for (let i = 1; i < snakeIds.length - 1; i++)
-        if (head.id + 20 == snakeIds[i].id) return true;
+        if (head.id == snakeIds[i].id) return true;
       return false;
   }
 }
@@ -163,6 +167,11 @@ function addFruit(gameState) {
   const newFruitId = possibleIds[randomId];
   document.getElementById(newFruitId).style.backgroundColor = "red";
   gameState.fruitId = newFruitId;
+}
+function tailLengthen() {
+  const endDirection = snakeIds[snakeIds.length - 1].nextMove;
+  const endId = snakeIds[snakeIds.length - 1].id;
+  snakeIds.push({ id: endId, nextMove: endDirection });
 }
 function removeColors() {
   snakeIds.forEach((item) => {
