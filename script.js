@@ -41,7 +41,7 @@ function move(gameState) {
   snakeIds.forEach(function (part, index) {
     //switching direction
     changeDirection(part, index);
-    console.log(JSON.parse(JSON.stringify(snakeIds)));
+    //console.log(JSON.parse(JSON.stringify(snakeIds)));
     //moving
     if (
       (part.id % 20 == 19 && part.nextMove == "right") ||
@@ -69,12 +69,14 @@ function move(gameState) {
 
       //console.log("iteracja " + part);
     }
+    //if (index == snakeIds.length - 1) breakPoints.shift();
   }, snakeIds);
   //console.log(snakeIds);
   recolor();
 }
 function changeDirection(part, index) {
-  breakPoints.forEach(function (bp, index) {
+  breakPoints.forEach((bp) => {
+    //console.log(index);
     if (bp.id == part.id) {
       switch (bp.newDirection) {
         case "left":
@@ -110,6 +112,11 @@ function changeDirection(part, index) {
           }
           break;
       }
+      // deleting used breakpoints
+      if (index == snakeIds.length - 1) {
+        breakPoints.shift();
+        //console.log(breakPoints);
+      }
     }
   }, breakPoints);
 }
@@ -126,6 +133,11 @@ function recolor() {
       "lightgreen";
     //console.log("kolory dodane");
   }
+}
+function colorAllBreakpoints() {
+  breakPoints.forEach((bp) => {
+    document.getElementById(bp.id).style.backgroundColor = "orange";
+  });
 }
 function createBreakPointLeft() {
   let bpoint = {
@@ -150,13 +162,22 @@ let snakeIds = [
   { id: 207, nextMove: "right" },
   { id: 206, nextMove: "right" },
 ];
-let breakPoints = [
-  { id: 217, newDirection: "left" },
-  { id: 157, newDirection: "left" },
-  { id: 156, newDirection: "right" },
-  { id: 136, newDirection: "right" },
-];
+let breakPoints = [];
+//adding left/right button functionality
 const leftButton = document.getElementById("goLeft");
+leftButton.addEventListener("click", createBreakPointLeft);
 const rightButton = document.getElementById("goRight");
+rightButton.addEventListener("click", createBreakPointRight);
+//adding arrow keys functionality
+document.onkeydown = function (e) {
+  switch (e.keyCode) {
+    case 37:
+      createBreakPointLeft();
+      break;
+    case 39:
+      createBreakPointRight();
+      break;
+  }
+};
 drawBoard();
 game();
