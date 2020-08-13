@@ -10,7 +10,13 @@ body {
   margin: 0.5px;
 }
 @media all and (orientation: landscape) {
+  main {
+    display: grid;
+    grid-template-areas: "left board right";
+    grid-template-columns: 1fr 100vh 1fr;
+  }
   #board {
+    grid-area: board;
     width: 100vh;
     height: 100vh;
     display: grid;
@@ -19,8 +25,24 @@ body {
     background-color: red;
     margin: auto;
   }
+  #goLeft {
+    grid-area: left;
+    background-color: lightgray;
+    text-align: center;
+  }
+  #goRight {
+    grid-area: right;
+    background-color: lightgray;
+    text-align: center;
+  }
 }
 @media all and (orientation: portrait) {
+  main {
+    display: grid;
+    grid-template-areas: "board board" "left right";
+    grid-template-columns: 50vw 50vw;
+    grid-template-rows: 100vw 1fr;
+  }
   #board {
     width: 100vw;
     height: 100vw;
@@ -28,5 +50,19 @@ body {
     grid-template-columns: repeat(20, 5vw);
     grid-template-rows: repeat(20, 5vw);
     background-color: red;
+  }
+  #goLeft {
+    grid-area: left;
+    background-color: lightgray;
+    height: 1fr;
+    justify-content: center;
+    text-align: center;
+  }
+  #goRight {
+    grid-area: right;
+    background-color: lightgray;
+    height: 1fr;
+    justify-content: center;
+    text-align: center;
   }
 }
