@@ -42,12 +42,14 @@ function move(gameState) {
     //switching direction
     changeDirection(part, index);
     //console.log(JSON.parse(JSON.stringify(snakeIds)));
+
     //moving
     if (
       (part.id % 20 == 19 && part.nextMove == "right") ||
       (part.id % 20 == 00 && part.nextMove == "left") ||
       (part.id >= 0 && part.id <= 19 && part.nextMove == "up") ||
-      (part.id >= 380 && part.id <= 399 && part.nextMove == "down")
+      (part.id >= 380 && part.id <= 399 && part.nextMove == "down") ||
+      isAboutToCrash()
     ) {
       gameState.isOver = true;
       //console.log("restart");
@@ -119,6 +121,27 @@ function changeDirection(part, index) {
       }
     }
   }, breakPoints);
+}
+function isAboutToCrash() {
+  const head = snakeIds[0];
+  switch (head.nextMove) {
+    case "right":
+      for (let i = 1; i < snakeIds.length - 1; i++)
+        if (head.id + 1 == snakeIds[i].id) return true;
+      return false;
+    case "left":
+      for (let i = 1; i < snakeIds.length - 1; i++)
+        if (head.id - 1 == snakeIds[i].id) return true;
+      return false;
+    case "up":
+      for (let i = 1; i < snakeIds.length - 1; i++)
+        if (head.id - 20 == snakeIds[i].id) return true;
+      return false;
+    case "down":
+      for (let i = 1; i < snakeIds.length - 1; i++)
+        if (head.id + 20 == snakeIds[i].id) return true;
+      return false;
+  }
 }
 function removeColors() {
   snakeIds.forEach((item) => {
