@@ -10,28 +10,39 @@ function drawBoard() {
     currentDiv.appendChild(newDiv);
   }
 }
-
 function game() {
-  let gameState = {
-    value: false,
+  const gameState = {
+    over: false,
+    fruit: [false, null],
+
     get isOver() {
-      return this.value;
+      return this.over;
     },
     set isOver(val) {
-      if (!this.value && val) {
-        this.value = val;
+      if (!this.over && val) {
+        this.over = val;
         clearInterval(snakeTimer);
         alert("GAME OVER");
-      } else this.value = val;
+      } else this.over = val;
+    },
+
+    get fruitId() {
+      return this.fruit[1];
+    },
+    set fruitId(id) {
+      if (this.fruit[0]) {
+        if (id == null) {
+          this.fruit = [false, id];
+          addFruit(this);
+        } else alert("FRUIT ERROR #1"); //adding new id to existing fruit
+      } else {
+        if (id != null) this.fruit = [true, id];
+        else alert("FRUIT ERROR #2"); //deleting non-existant fruit
+      }
     },
   };
-
-  let head = document.getElementById(snakeIds[0].id);
-  head.style.backgroundColor = "green";
-  for (let i = 1; i < snakeIds.length; i++) {
-    document.getElementById(snakeIds[i].id).style.backgroundColor =
-      "lightgreen";
-  }
+  recolor();
+  addFruit(gameState);
   const snakeTimer = setInterval(() => {
     move(gameState);
   }, 500);
@@ -68,7 +79,7 @@ function move(gameState) {
           this[index].id += 20;
           break;
       }
-
+      if (index == 0 && part.id == gameState.fruitId) gameState.fruitId = null;
       //console.log("iteracja " + part);
     }
     //if (index == snakeIds.length - 1) breakPoints.shift();
@@ -143,6 +154,16 @@ function isAboutToCrash() {
       return false;
   }
 }
+function addFruit(gameState) {
+  const possibleIds = [];
+  for (let i = 0; i < dotsNumber; i++) {
+    if (!snakeIds.some((item) => item.id == i)) possibleIds.push(i);
+  }
+  const randomId = Math.floor(Math.random() * possibleIds.length);
+  const newFruitId = possibleIds[randomId];
+  document.getElementById(newFruitId).style.backgroundColor = "red";
+  gameState.fruitId = newFruitId;
+}
 function removeColors() {
   snakeIds.forEach((item) => {
     document.getElementById(item.id).style.backgroundColor = "royalblue";
@@ -157,6 +178,7 @@ function recolor() {
     //console.log("kolory dodane");
   }
 }
+//function used to debug breakpoints
 function colorAllBreakpoints() {
   breakPoints.forEach((bp) => {
     document.getElementById(bp.id).style.backgroundColor = "orange";
