@@ -194,18 +194,22 @@ function colorAllBreakpoints() {
   });
 }
 function createBreakPointLeft() {
-  let bpoint = {
-    id: snakeIds[0].id,
-    newDirection: "left",
-  };
-  breakPoints.push(bpoint);
+  if (!breakPoints.some((bp) => bp.id == snakeIds[0].id)) {
+    let bpoint = {
+      id: snakeIds[0].id,
+      newDirection: "left",
+    };
+    breakPoints.push(bpoint);
+  }
 }
 function createBreakPointRight() {
-  let bpoint = {
-    id: snakeIds[0].id,
-    newDirection: "right",
-  };
-  breakPoints.push(bpoint);
+  if (!breakPoints.some((bp) => bp.id == snakeIds[0].id)) {
+    let bpoint = {
+      id: snakeIds[0].id,
+      newDirection: "right",
+    };
+    breakPoints.push(bpoint);
+  }
 }
 
 const dotsNumber = 400;
