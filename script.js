@@ -4,7 +4,7 @@ function drawBoard() {
     newDiv.setAttribute("class", "dot");
     newDiv.setAttribute("id", i);
     const marker = document.createTextNode(i);
-    newDiv.appendChild(marker);
+    //newDiv.appendChild(marker);
 
     const currentDiv = document.getElementById("board");
     currentDiv.appendChild(newDiv);
@@ -45,15 +45,12 @@ function game() {
   addFruit(gameState);
   const snakeTimer = setInterval(() => {
     move(gameState);
-  }, 500);
+  }, 100);
 }
 function move(gameState) {
-  //removeColors();
   snakeIds.forEach(function (part, index) {
     //switching direction
     changeDirection(part, index);
-    //console.log(JSON.parse(JSON.stringify(snakeIds)));
-
     //moving
     if (
       (part.id % 20 == 19 && part.nextMove == "right") ||
@@ -62,7 +59,6 @@ function move(gameState) {
       (part.id >= 380 && part.id <= 399 && part.nextMove == "down")
     ) {
       gameState.isOver = true;
-      //console.log("restart");
     } else {
       removeColors();
       switch (part.nextMove) {
@@ -79,21 +75,17 @@ function move(gameState) {
           this[index].id += 20;
           break;
       }
-      if (isAboutToCrash()) gameState.isOver = true;
+      if (isAboutToCrashWithSelf()) gameState.isOver = true;
       if (index == 0 && part.id == gameState.fruitId) {
         gameState.fruitId = null;
         tailLengthen();
       }
-      //console.log("iteracja " + part);
     }
-    //if (index == snakeIds.length - 1) breakPoints.shift();
   }, snakeIds);
-  //console.log(snakeIds);
   recolor();
 }
 function changeDirection(part, index) {
   breakPoints.forEach((bp) => {
-    //console.log(index);
     if (bp.id == part.id) {
       switch (bp.newDirection) {
         case "left":
@@ -130,14 +122,11 @@ function changeDirection(part, index) {
           break;
       }
       // deleting used breakpoints
-      if (index == snakeIds.length - 1) {
-        breakPoints.shift();
-        //console.log(breakPoints);
-      }
+      if (index == snakeIds.length - 1) breakPoints.shift();
     }
   }, breakPoints);
 }
-function isAboutToCrash() {
+function isAboutToCrashWithSelf() {
   const head = snakeIds[0];
   switch (head.nextMove) {
     case "right":
@@ -176,7 +165,6 @@ function tailLengthen() {
 function removeColors() {
   snakeIds.forEach((item) => {
     document.getElementById(item.id).style.backgroundColor = "royalblue";
-    //console.log("kolory usunięte");
   });
 }
 function recolor() {
@@ -184,7 +172,6 @@ function recolor() {
   for (let i = 1; i < snakeIds.length; i++) {
     document.getElementById(snakeIds[i].id).style.backgroundColor =
       "lightgreen";
-    //console.log("kolory dodane");
   }
 }
 //function used to debug breakpoints
@@ -200,6 +187,8 @@ function createBreakPointLeft() {
       newDirection: "left",
     };
     breakPoints.push(bpoint);
+  } else {
+    //if bp for current id already exists
   }
 }
 function createBreakPointRight() {
@@ -217,8 +206,6 @@ let snakeIds = [
   { id: 210, nextMove: "right" },
   { id: 209, nextMove: "right" },
   { id: 208, nextMove: "right" },
-  { id: 207, nextMove: "right" },
-  { id: 206, nextMove: "right" },
 ];
 let breakPoints = [];
 //adding left/right button functionality
