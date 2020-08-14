@@ -7,7 +7,6 @@ body {
   background-color: royalblue;
   text-align: center;
   justify-content: center;
-  margin: 0.5px;
 }
 @media all and (orientation: landscape) {
   main {
@@ -22,7 +21,7 @@ body {
     display: grid;
     grid-template-columns: repeat(20, 5vh);
     grid-template-rows: repeat(20, 5vh);
-    background-color: red;
+    background-color: lightgray;
     margin: auto;
   }
   #goLeft {
@@ -49,7 +48,7 @@ body {
     display: grid;
     grid-template-columns: repeat(20, 5vw);
     grid-template-rows: repeat(20, 5vw);
-    background-color: red;
+    background-color: lightgray;
   }
   #goLeft {
     grid-area: left;

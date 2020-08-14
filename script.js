@@ -45,7 +45,7 @@ function game() {
   addFruit(gameState);
   const snakeTimer = setInterval(() => {
     move(gameState);
-  }, 100);
+  }, 500);
 }
 function move(gameState) {
   snakeIds.forEach(function (part, index) {
