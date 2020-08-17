@@ -4,7 +4,7 @@ function drawBoard() {
     newDiv.setAttribute("class", "dot");
     newDiv.setAttribute("id", i);
     const marker = document.createTextNode(i);
-    //newDiv.appendChild(marker);
+    newDiv.appendChild(marker);
 
     const currentDiv = document.getElementById("board");
     currentDiv.appendChild(newDiv);
@@ -22,7 +22,9 @@ function game() {
       if (!this.over && val) {
         clearInterval(snakeTimer);
         this.over = val;
-        alert("GAME OVER");
+        gameOver();
+        //alert("GAME OVER");
+        //console.log("GAME OVER");
       } else this.over = val;
     },
 
@@ -49,40 +51,62 @@ function game() {
 }
 function move(gameState) {
   snakeIds.forEach(function (part, index) {
-    //switching direction
-    changeDirection(part, index);
-    //moving
-    if (
-      (part.id % 20 == 19 && part.nextMove == "right") ||
-      (part.id % 20 == 00 && part.nextMove == "left") ||
-      (part.id >= 0 && part.id <= 19 && part.nextMove == "up") ||
-      (part.id >= 380 && part.id <= 399 && part.nextMove == "down")
-    ) {
-      gameState.isOver = true;
-    } else {
-      removeColors();
-      switch (part.nextMove) {
+    if (isAboutToCrashWithSelf()) gameState.isOver = true;
+    if (!gameState.isOver) {
+      console.log(gameState.isOver);
+      //switching direction
+      changeDirection(part, index);
+      //moving
+      if (
+        (part.id % 20 == 19 && part.nextMove == "right") ||
+        (part.id % 20 == 00 && part.nextMove == "left") ||
+        (part.id >= 0 && part.id <= 19 && part.nextMove == "up") ||
+        (part.id >= 380 && part.id <= 399 && part.nextMove == "down")
+      ) {
+        gameState.isOver = true;
+      } else {
+        removeColors();
+        switch (part.nextMove) {
+          case "right":
+            this[index].id++;
+            break;
+          case "left":
+            this[index].id--;
+            break;
+          case "up":
+            this[index].id -= 20;
+            break;
+          case "down":
+            this[index].id += 20;
+            break;
+        }
+
+        if (index == 0 && part.id == gameState.fruitId) {
+          gameState.fruitId = null;
+          tailLengthen();
+        }
+        //recolor();
+        //console.log("ruch");
+      }
+    } else if (isAboutToCrashWithSelf()) {
+      const head = snakeIds[0];
+      switch (head.nextMove) {
         case "right":
-          this[index].id++;
+          head.id--;
           break;
         case "left":
-          this[index].id--;
+          head.id++;
           break;
         case "up":
-          this[index].id -= 20;
+          head.id += 20;
           break;
         case "down":
-          this[index].id += 20;
+          head.id -= 20;
           break;
       }
-      if (isAboutToCrashWithSelf()) gameState.isOver = true;
-      if (index == 0 && part.id == gameState.fruitId) {
-        gameState.fruitId = null;
-        tailLengthen();
-      }
     }
+    recolor();
   }, snakeIds);
-  recolor();
 }
 function changeDirection(part, index) {
   breakPoints.forEach((bp) => {
@@ -200,14 +224,18 @@ function createBreakPointRight() {
     breakPoints.push(bpoint);
   }
 }
+function gameOver() {
+  const dots = document.getElementById("board");
+  dots.style.filter = "blur(2px)";
+}
 
 const dotsNumber = 400;
-let snakeIds = [
+const snakeIds = [
   { id: 210, nextMove: "right" },
   { id: 209, nextMove: "right" },
   { id: 208, nextMove: "right" },
 ];
-let breakPoints = [];
+const breakPoints = [];
 //adding left/right button functionality
 const leftButton = document.getElementById("goLeft");
 leftButton.addEventListener("click", createBreakPointLeft);
