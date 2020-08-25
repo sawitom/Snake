@@ -3,13 +3,14 @@ function drawBoard() {
     const newDiv = document.createElement("div");
     newDiv.setAttribute("class", "dot");
     newDiv.setAttribute("id", i);
-    const marker = document.createTextNode(i);
-    newDiv.appendChild(marker);
+    //const marker = document.createTextNode(i);
+    //newDiv.appendChild(marker);
 
     const currentDiv = document.getElementById("board");
     currentDiv.appendChild(newDiv);
   }
 }
+function resetBoard() {}
 function game() {
   const gameState = {
     over: false,
@@ -43,6 +44,11 @@ function game() {
       }
     },
   };
+  snakeIds = [
+    { id: 210, nextMove: "right" },
+    { id: 209, nextMove: "right" },
+    { id: 208, nextMove: "right" },
+  ];
   recolor();
   addFruit(gameState);
   const snakeTimer = setInterval(() => {
@@ -212,7 +218,11 @@ function createBreakPointLeft() {
     };
     breakPoints.push(bpoint);
   } else {
-    //if bp for current id already exists
+    const indexToChange = breakPoints
+      .map((item) => item.id)
+      .indexOf(snakeIds[0].id);
+    breakPoints[indexToChange].newDirection = "left";
+    console.log(breakPoints[indexToChange].newDirection);
   }
 }
 function createBreakPointRight() {
@@ -222,15 +232,60 @@ function createBreakPointRight() {
       newDirection: "right",
     };
     breakPoints.push(bpoint);
+  } else {
+    const indexToChange = breakPoints
+      .map((item) => item.id)
+      .indexOf(snakeIds[0].id);
+    breakPoints[indexToChange].newDirection = "right";
+    console.log(breakPoints[indexToChange].newDirection);
   }
 }
 function gameOver() {
-  const dots = document.getElementById("board");
-  dots.style.filter = "blur(2px)";
+  const board = document.getElementById("board");
+  const gameOver = document.getElementById("gameOver");
+  board.style.animation = "addBlur 1s ease 0s 1 forwards";
+  leftButton.style.animation = "addBlur 1s ease 0s 1 forwards";
+  rightButton.style.animation = "addBlur 1s ease 0s 1 forwards";
+  //gameOver.style.transform = "transform: translateY(0)";
+  gameOver.style.animation = "slideBackIn 0s ease 0s 1 forwards";
+  gameOver.style.display = "grid";
+  setTimeout(showInfo, 500);
 }
 
+const info = document.getElementById("info");
+function hideInfo() {
+  const board = document.getElementById("board");
+  info.style.animation = "slideOut 1s ease 0s 1 forwards";
+  board.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
+  leftButton.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
+  rightButton.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
+  leftButton.style.pointerEvents = "auto";
+  rightButton.style.pointerEvents = "auto";
+}
+function showInfo() {
+  info.style.animation = "slideIn 1s ease 0s 1 forwards";
+}
+const playButton = document.getElementById("play");
+const restartButton = document.getElementById("restart");
+const menuButton = document.getElementById("menu");
+playButton.addEventListener("click", () => {
+  hideInfo();
+  drawBoard();
+  recolor();
+  setTimeout(game, 1500);
+});
+restartButton.addEventListener("click", () => {
+  hideInfo();
+  drawBoard();
+  recolor();
+  setTimeout(game, 1500);
+});
+menuButton.addEventListener("click", () => {
+  document.getElementById("gameOver").style.animation =
+    "slideOut 0.5s ease 0s 1 forwards";
+});
 const dotsNumber = 400;
-const snakeIds = [
+let snakeIds = [
   { id: 210, nextMove: "right" },
   { id: 209, nextMove: "right" },
   { id: 208, nextMove: "right" },
@@ -252,5 +307,6 @@ document.onkeydown = function (e) {
       break;
   }
 };
+
 drawBoard();
-game();
+//game();

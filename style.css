@@ -1,14 +1,58 @@
 body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 .dot {
   display: flex;
   background-color: royalblue;
   text-align: center;
   justify-content: center;
+  pointer-events: none;
 }
-@media all and (orientation: landscape) {
+#board {
+  filter: blur(2px);
+  pointer-events: none;
+}
+#goLeft {
+  pointer-events: none;
+}
+#goRight {
+  pointer-events: none;
+}
+#stats {
+  grid-area: stats;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: "points" "time";
+  background-color: orange;
+}
+.logo {
+  grid-area: logo;
+  text-align: center;
+  align-self: center;
+  font-size: 12vw;
+  background-color: mediumorchid;
+  border: solid;
+}
+
+#points {
+  grid-area: points;
+  text-align: center;
+  align-self: center;
+  font-size: 4.5vw;
+  background-color: olive;
+  border: solid;
+}
+#time {
+  grid-area: time;
+  text-align: center;
+  align-self: center;
+  font-size: 4.5vw;
+  background-color: yellow;
+  border: solid;
+}
+@media (orientation: landscape) {
   main {
     display: grid;
     grid-template-areas: "left board right";
@@ -28,14 +72,53 @@ body {
     grid-area: left;
     background-color: lightgray;
     text-align: center;
+    filter: blur(2px);
   }
   #goRight {
     grid-area: right;
     background-color: lightgray;
     text-align: center;
+    filter: blur(2px);
+  }
+  #info {
+    display: grid;
+    grid-template-areas: "logo logo" "introduction play";
+    grid-template-rows: 30% 70%;
+    grid-template-columns: 60% 40%;
+    position: absolute;
+    left: 10vw;
+    top: 10vh;
+    width: 80vw;
+    height: 80vh;
+    background-color: maroon;
+    overflow: hidden;
+  }
+  #introduction {
+    grid-area: introduction;
+    padding: 5%;
+    background-color: orange;
+    border: solid;
+  }
+  #play {
+    grid-area: play;
+  }
+  #gameOver {
+    display: none;
+    grid-template-areas:
+      "logo logo"
+      "stats menu"
+      "stats restart";
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 40% 30% 30%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: cyan;
   }
 }
-@media all and (orientation: portrait) {
+@media (orientation: portrait) {
   main {
     display: grid;
     grid-template-areas: "board board" "left right";
@@ -53,15 +136,89 @@ body {
   #goLeft {
     grid-area: left;
     background-color: lightgray;
-    height: 1fr;
     justify-content: center;
     text-align: center;
+    filter: blur(2px);
   }
   #goRight {
     grid-area: right;
     background-color: lightgray;
-    height: 1fr;
     justify-content: center;
     text-align: center;
+    filter: blur(2px);
+  }
+  #info {
+    display: grid;
+    grid-template-areas: "logo" "introduction" "play";
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 60% 20%;
+    position: absolute;
+    left: 10vw;
+    top: 10vh;
+    width: 80vw;
+    height: 80vh;
+    background-color: maroon;
+    overflow: hidden;
+  }
+  #introduction {
+    grid-area: introduction;
+    padding: 5%;
+    background-color: orange;
+    border: solid;
+  }
+  #play {
+    grid-area: play;
+  }
+  #gameOver {
+    display: none;
+    grid-template-areas: "logo" "stats" "menu" "restart";
+    grid-template-columns: 100%;
+    grid-template-rows: 25% 35% 20% 20%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80vw;
+    height: 80vh;
+    background-color: cyan;
+  }
+}
+@keyframes slideOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes slideBackIn {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes removeBlur {
+  0% {
+    filter: blur(2px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+@keyframes addBlur {
+  0% {
+    filter: blur(0);
+  }
+  100% {
+    filter: blur(2px);
   }
 }

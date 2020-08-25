@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Snake</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
@@ -9,8 +10,39 @@
   <body>
     <main>
       <div id="board"></div>
-      <div id="goLeft">Left</div>
-      <div id="goRight">Right</div>
+      <button id="goLeft">Left</button>
+      <button id="goRight">Right</button>
+      <div id="info">
+        <span class="logo">Snake</span>
+        <div id="introduction">
+          <span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+            enim magna, tincidunt sed urna non, convallis venenatis nunc. Aenean
+            fermentum tempor dapibus. Ut pretium nisl vitae enim iaculis
+            interdum. Nam tempor diam in nibh dapibus tempor. Integer turpis
+            orci, congue id viverra vitae, faucibus quis nulla. Duis at ex sit
+            amet velit tincidunt varius eget ac ipsum. Donec sapien nulla,
+            fringilla eget pulvinar vitae, dictum eu purus. Vestibulum commodo,
+            sem eget tempor suscipit, ante sem sodales odio, at pulvinar augue
+            odio ac nulla. Aenean imperdiet lacinia risus, et finibus nibh
+            congue non. Sed non rutrum arcu. Aenean turpis risus, vestibulum
+            quis quam id, mattis laoreet erat. Duis congue blandit odio vel
+            finibus. Pellentesque tincidunt aliquam dolor scelerisque eleifend.
+            Nunc non auctor quam. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit.
+          </span>
+        </div>
+        <button id="play">Play</button>
+        <div id="gameOver">
+          <span class="logo">Game Over</span>
+          <div id="stats">
+            <span id="points">You earned X points.</span>
+            <span id="time">Play Time: Y seconds.</span>
+          </div>
+          <button id="menu">Menu</button>
+          <button id="restart">Restart</button>
+        </div>
+      </div>
     </main>
     <script src="script.js"></script>
   </body>
