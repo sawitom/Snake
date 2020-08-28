@@ -5,7 +5,6 @@ body {
 }
 .dot {
   display: flex;
-  background-color: royalblue;
   text-align: center;
   justify-content: center;
   pointer-events: none;
@@ -13,6 +12,7 @@ body {
 #board {
   filter: blur(2px);
   pointer-events: none;
+  background-color: royalblue;
 }
 #goLeft {
   pointer-events: none;
@@ -35,7 +35,9 @@ body {
   background-color: mediumorchid;
   border: solid;
 }
-
+#info {
+  opacity: 1;
+}
 #points {
   grid-area: points;
   text-align: center;
@@ -65,7 +67,7 @@ body {
     display: grid;
     grid-template-columns: repeat(20, 5vh);
     grid-template-rows: repeat(20, 5vh);
-    background-color: lightgray;
+
     margin: auto;
   }
   #goLeft {
@@ -131,7 +133,6 @@ body {
     display: grid;
     grid-template-columns: repeat(20, 5vw);
     grid-template-rows: repeat(20, 5vw);
-    background-color: lightgray;
   }
   #goLeft {
     grid-area: left;
@@ -220,5 +221,21 @@ body {
   }
   100% {
     filter: blur(2px);
+  }
+}
+@keyframes hideItem {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes showItem {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

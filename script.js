@@ -12,6 +12,8 @@ function drawBoard() {
 }
 function resetBoard() {}
 function game() {
+  timer = 0;
+  score = 0;
   const gameState = {
     over: false,
     fruit: [false, null],
@@ -35,6 +37,7 @@ function game() {
     set fruitId(id) {
       if (this.fruit[0]) {
         if (id == null) {
+          score++;
           this.fruit = [false, id];
           addFruit(this);
         } else alert("FRUIT ERROR #1"); //adding new id to existing fruit
@@ -44,11 +47,6 @@ function game() {
       }
     },
   };
-  snakeIds = [
-    { id: 210, nextMove: "right" },
-    { id: 209, nextMove: "right" },
-    { id: 208, nextMove: "right" },
-  ];
   recolor();
   addFruit(gameState);
   const snakeTimer = setInterval(() => {
@@ -56,10 +54,11 @@ function game() {
   }, 500);
 }
 function move(gameState) {
+  timer += 0.5;
   snakeIds.forEach(function (part, index) {
     if (isAboutToCrashWithSelf()) gameState.isOver = true;
     if (!gameState.isOver) {
-      console.log(gameState.isOver);
+      //console.log(gameState.isOver);
       //switching direction
       changeDirection(part, index);
       //moving
@@ -113,6 +112,7 @@ function move(gameState) {
     }
     recolor();
   }, snakeIds);
+  //colorAllBreakpoints();
 }
 function changeDirection(part, index) {
   breakPoints.forEach((bp) => {
@@ -194,7 +194,7 @@ function tailLengthen() {
 }
 function removeColors() {
   snakeIds.forEach((item) => {
-    document.getElementById(item.id).style.backgroundColor = "royalblue";
+    document.getElementById(item.id).style.backgroundColor = "";
   });
 }
 function recolor() {
@@ -241,21 +241,43 @@ function createBreakPointRight() {
   }
 }
 function gameOver() {
+  const points = document.getElementById("points");
+  const time = document.getElementById("time");
+  points.innerHTML = `You earned ${score} points.`;
+  time.innerHTML = `Play time: ${String(timer).replace(".", ",")} seconds.`;
   const board = document.getElementById("board");
   const gameOver = document.getElementById("gameOver");
   board.style.animation = "addBlur 1s ease 0s 1 forwards";
   leftButton.style.animation = "addBlur 1s ease 0s 1 forwards";
   rightButton.style.animation = "addBlur 1s ease 0s 1 forwards";
-  //gameOver.style.transform = "transform: translateY(0)";
   gameOver.style.animation = "slideBackIn 0s ease 0s 1 forwards";
   gameOver.style.display = "grid";
   setTimeout(showInfo, 500);
+}
+function hideSnakeAndFruit() {
+  for (let i = 0; i < dotsNumber; i++) {
+    const current = document.getElementById(i);
+    if (current.style.backgroundColor != "") {
+      current.style.animation = "hideItem 1s ease";
+      setTimeout(() => {
+        current.style.removeProperty("background-color");
+        current.style.removeProperty("animation");
+      }, 1000);
+    }
+  }
+}
+function setNewSnake() {
+  snakeIds = [
+    { id: 210, nextMove: "right" },
+    { id: 209, nextMove: "right" },
+    { id: 208, nextMove: "right" },
+  ];
 }
 
 const info = document.getElementById("info");
 function hideInfo() {
   const board = document.getElementById("board");
-  info.style.animation = "slideOut 1s ease 0s 1 forwards";
+  info.style.animation = "slideOut 0.5s ease 0s 1 forwards";
   board.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
   leftButton.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
   rightButton.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
@@ -263,20 +285,23 @@ function hideInfo() {
   rightButton.style.pointerEvents = "auto";
 }
 function showInfo() {
-  info.style.animation = "slideIn 1s ease 0s 1 forwards";
+  info.style.animation = "slideIn 0.5s ease 0s 1 forwards";
 }
+
 const playButton = document.getElementById("play");
 const restartButton = document.getElementById("restart");
 const menuButton = document.getElementById("menu");
 playButton.addEventListener("click", () => {
   hideInfo();
-  drawBoard();
+  hideSnakeAndFruit();
+  setNewSnake();
   recolor();
   setTimeout(game, 1500);
 });
 restartButton.addEventListener("click", () => {
   hideInfo();
-  drawBoard();
+  hideSnakeAndFruit();
+  setNewSnake();
   recolor();
   setTimeout(game, 1500);
 });
@@ -285,11 +310,7 @@ menuButton.addEventListener("click", () => {
     "slideOut 0.5s ease 0s 1 forwards";
 });
 const dotsNumber = 400;
-let snakeIds = [
-  { id: 210, nextMove: "right" },
-  { id: 209, nextMove: "right" },
-  { id: 208, nextMove: "right" },
-];
+let snakeIds;
 const breakPoints = [];
 //adding left/right button functionality
 const leftButton = document.getElementById("goLeft");
@@ -307,6 +328,7 @@ document.onkeydown = function (e) {
       break;
   }
 };
-
+let timer;
+let score;
+showInfo();
 drawBoard();
-//game();
