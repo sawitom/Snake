@@ -14,6 +14,7 @@ function resetBoard() {}
 function game() {
   timer = 0;
   score = 0;
+  const intervalTime = chooseDifficulty();
   const gameState = {
     over: false,
     fruit: [false, null],
@@ -51,7 +52,7 @@ function game() {
   addFruit(gameState);
   const snakeTimer = setInterval(() => {
     move(gameState);
-  }, 500);
+  }, intervalTime);
 }
 function move(gameState) {
   timer += 0.5;
@@ -204,6 +205,14 @@ function recolor() {
       "lightgreen";
   }
 }
+function chooseDifficulty() {
+  let difficulty = document.querySelector("input[name='diff']:checked").value;
+  if (difficulty === "custom") {
+    difficulty = document.querySelector("input[name='customInput']").value;
+  }
+  return 1000 / difficulty;
+  //console.log(difficulty);
+}
 //function used to debug breakpoints
 function colorAllBreakpoints() {
   breakPoints.forEach((bp) => {
@@ -222,7 +231,7 @@ function createBreakPointLeft() {
       .map((item) => item.id)
       .indexOf(snakeIds[0].id);
     breakPoints[indexToChange].newDirection = "left";
-    console.log(breakPoints[indexToChange].newDirection);
+    //console.log(breakPoints[indexToChange].newDirection);
   }
 }
 function createBreakPointRight() {
@@ -237,14 +246,14 @@ function createBreakPointRight() {
       .map((item) => item.id)
       .indexOf(snakeIds[0].id);
     breakPoints[indexToChange].newDirection = "right";
-    console.log(breakPoints[indexToChange].newDirection);
+    //console.log(breakPoints[indexToChange].newDirection);
   }
 }
 function gameOver() {
   const points = document.getElementById("points");
-  const time = document.getElementById("time");
+  //const time = document.getElementById("time");
   points.innerHTML = `You earned ${score} points.`;
-  time.innerHTML = `Play time: ${String(timer).replace(".", ",")} seconds.`;
+  //time.innerHTML = `Play time: ${String(timer).replace(".", ",")} seconds.`;
   const board = document.getElementById("board");
   const gameOver = document.getElementById("gameOver");
   board.style.animation = "addBlur 1s ease 0s 1 forwards";
@@ -330,5 +339,6 @@ document.onkeydown = function (e) {
 };
 let timer;
 let score;
+
 showInfo();
 drawBoard();

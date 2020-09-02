@@ -15,34 +15,70 @@
       <div id="info">
         <span class="logo">Snake</span>
         <div id="introduction">
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            enim magna, tincidunt sed urna non, convallis venenatis nunc. Aenean
-            fermentum tempor dapibus. Ut pretium nisl vitae enim iaculis
-            interdum. Nam tempor diam in nibh dapibus tempor. Integer turpis
-            orci, congue id viverra vitae, faucibus quis nulla. Duis at ex sit
-            amet velit tincidunt varius eget ac ipsum. Donec sapien nulla,
-            fringilla eget pulvinar vitae, dictum eu purus. Vestibulum commodo,
-            sem eget tempor suscipit, ante sem sodales odio, at pulvinar augue
-            odio ac nulla. Aenean imperdiet lacinia risus, et finibus nibh
-            congue non. Sed non rutrum arcu. Aenean turpis risus, vestibulum
-            quis quam id, mattis laoreet erat. Duis congue blandit odio vel
-            finibus. Pellentesque tincidunt aliquam dolor scelerisque eleifend.
-            Nunc non auctor quam. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit.
-          </span>
+          <div>
+            <span>
+              <b>How to play:</b><br /><br />
+              Navigate the snake to eat as many fruits as you can.<br /><br />
+              Game ends as soon as you crash into your tail or the border of the
+              board.<br /><br />
+              <u>Controls:</u>
+            </span>
+            <ul>
+              <li>Turn left: <b>left arrow key</b> or <b>left button</b></li>
+              <li>Turn right: <b>right arrow key</b> or <b>right button</b></li>
+              <li>Snake moves forward by itself</li>
+            </ul>
+          </div>
+          <div id="difficulty-set">
+            <form action="" autocomplete="off" id="difficultyForm">
+              <u>Difficulty:</u>
+              <div>
+                <input type="radio" value="1" id="easy" name="diff" />
+                <label for="easy">Easy – 1 move per 1s</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  value="2"
+                  id="medium"
+                  name="diff"
+                  checked="checked"
+                />
+                <label for="medium">Medium – 2 moves per 1s</label>
+              </div>
+              <div>
+                <input type="radio" value="5" id="hard" name="diff" />
+                <label for="hard">Hard – 5 moves per 1s</label>
+              </div>
+              <div>
+                <input type="radio" value="custom" id="custom" name="diff" />
+                <label for="custom"
+                  >Custom –
+                  <input
+                    type="text"
+                    name="customInput"
+                    placeholder="12345"
+                    size="4"
+                    maxlength="5"
+                    for="custom"
+                  />
+                  move(s) per 1s</label
+                >
+              </div>
+            </form>
+          </div>
         </div>
         <button id="play">Play</button>
         <div id="gameOver">
           <span class="logo">Game Over</span>
           <div id="stats">
             <span id="points"></span>
-            <span id="time"></span>
           </div>
           <button id="menu">Menu</button>
           <button id="restart">Restart</button>
         </div>
       </div>
+      <div id="footer">Tomasz Sawicki</div>
     </main>
     <script src="script.js"></script>
   </body>

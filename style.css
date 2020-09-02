@@ -4,9 +4,6 @@ body {
   overflow: hidden;
 }
 .dot {
-  display: flex;
-  text-align: center;
-  justify-content: center;
   pointer-events: none;
 }
 #board {
@@ -17,6 +14,7 @@ body {
 #goLeft {
   pointer-events: none;
 }
+
 #goRight {
   pointer-events: none;
 }
@@ -54,29 +52,45 @@ body {
   background-color: yellow;
   border: solid;
 }
+#footer {
+  grid-area: footer;
+  background-color: #666666;
+  color: #111111;
+}
+#difficulty-set {
+}
+
 @media (orientation: landscape) {
   main {
     display: grid;
-    grid-template-areas: "left board right";
-    grid-template-columns: 1fr 100vh 1fr;
+    height: 100vh;
+    grid-template-areas: "left board right" "footer footer footer";
+    grid-template-columns: minmax(15px, 1fr) 95vh minmax(15px, 1fr);
+    grid-template-rows: 95vh 5vh;
   }
   #board {
+    grid-row: 1/2;
+    grid-column: 2/3;
     grid-area: board;
-    width: 100vh;
-    height: 100vh;
+    /*width: 100vh;
+    height: 100vh;*/
     display: grid;
-    grid-template-columns: repeat(20, 5vh);
-    grid-template-rows: repeat(20, 5vh);
+    grid-template-columns: repeat(20, 4.75vh);
+    grid-template-rows: repeat(20, 4.75vh);
 
     margin: auto;
   }
   #goLeft {
+    grid-row: 1/2;
+    grid-column: 1/2;
     grid-area: left;
     background-color: lightgray;
     text-align: center;
     filter: blur(2px);
   }
   #goRight {
+    grid-row: 1/2;
+    grid-column: 3/4;
     grid-area: right;
     background-color: lightgray;
     text-align: center;
@@ -119,13 +133,19 @@ body {
     height: 100%;
     background-color: cyan;
   }
+  #footer {
+    grid-row: 2/3;
+    grid-column: 1/4;
+    grid-area: footer;
+  }
 }
 @media (orientation: portrait) {
   main {
     display: grid;
-    grid-template-areas: "board board" "left right";
+    height: 100vh;
+    grid-template-areas: "board board" "left right" "footer footer";
     grid-template-columns: 50vw 50vw;
-    grid-template-rows: 100vw 1fr;
+    grid-template-rows: 100vw 1fr 5vh;
   }
   #board {
     width: 100vw;
@@ -139,7 +159,7 @@ body {
     background-color: lightgray;
     justify-content: center;
     text-align: center;
-    filter: blur(2px);
+    /*filter: blur(2px);*/
   }
   #goRight {
     grid-area: right;
