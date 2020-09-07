@@ -13,14 +13,13 @@
       <button id="goLeft">Left</button>
       <button id="goRight">Right</button>
       <div id="info">
-        <span class="logo">Snake</span>
+        <div class="logo">Snake</div>
         <div id="introduction">
-          <div>
+          <div id="instructions">
             <span>
               <b>How to play:</b><br /><br />
-              Navigate the snake to eat as many fruits as you can.<br /><br />
-              Game ends as soon as you crash into your tail or the border of the
-              board.<br /><br />
+              Eat fruits to grow and earn points.<br /><br />
+              If you crash into your tail or a wall, game ends.<br /><br />
               <u>Controls:</u>
             </span>
             <ul>
@@ -31,12 +30,14 @@
           </div>
           <div id="difficulty-set">
             <form action="" autocomplete="off" id="difficultyForm">
-              <u>Difficulty:</u>
-              <div>
+              <b>Difficulty:</b>
+              <div class="radioButtons">
                 <input type="radio" value="1" id="easy" name="diff" />
-                <label for="easy">Easy – 1 move per 1s</label>
+                <label for="easy" id="easyLabel"
+                  >Easy – 1 move per second</label
+                >
               </div>
-              <div>
+              <div class="radioButtons">
                 <input
                   type="radio"
                   value="2"
@@ -44,25 +45,29 @@
                   name="diff"
                   checked="checked"
                 />
-                <label for="medium">Medium – 2 moves per 1s</label>
+                <label for="medium" id="mediumLabel"
+                  >Medium – 2 moves per second</label
+                >
               </div>
-              <div>
+              <div class="radioButtons">
                 <input type="radio" value="5" id="hard" name="diff" />
-                <label for="hard">Hard – 5 moves per 1s</label>
+                <label for="hard" id="hardLabel"
+                  >Hard – 5 moves per second</label
+                >
               </div>
-              <div>
+              <div class="radioButtons">
                 <input type="radio" value="custom" id="custom" name="diff" />
-                <label for="custom"
+                <label for="custom" id="customLabel"
                   >Custom –
                   <input
                     type="text"
+                    id="customValueInput"
                     name="customInput"
                     placeholder="12345"
                     size="4"
                     maxlength="5"
-                    for="custom"
                   />
-                  move(s) per 1s</label
+                  move(s) per second</label
                 >
               </div>
             </form>
@@ -70,9 +75,10 @@
         </div>
         <button id="play">Play</button>
         <div id="gameOver">
-          <span class="logo">Game Over</span>
+          <div class="logo">Game Over</div>
           <div id="stats">
             <span id="points"></span>
+            <span id="difficulty-info"></span>
           </div>
           <button id="menu">Menu</button>
           <button id="restart">Restart</button>

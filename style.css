@@ -22,51 +22,47 @@ body {
   grid-area: stats;
   display: grid;
   grid-template-rows: 50% 50%;
-  grid-template-areas: "points" "time";
-  background-color: orange;
+  grid-template-areas: "points" "difficulty-info";
 }
 .logo {
+  display: flex;
+  height: 100%;
   grid-area: logo;
-  text-align: center;
-  align-self: center;
+  align-items: center;
+  justify-content: center;
   font-size: 12vw;
-  background-color: mediumorchid;
-  border: solid;
+  border-bottom: solid;
+  background-color: #838584;
+  background-image: url("wood-pattern.png");
 }
 #info {
-  opacity: 1;
-}
-#points {
-  grid-area: points;
-  text-align: center;
-  align-self: center;
-  font-size: 4.5vw;
-  background-color: olive;
   border: solid;
+  background-color: #bdbdbd;
+  background-image: url("wood-pattern.png");
 }
-#time {
-  grid-area: time;
-  text-align: center;
-  align-self: center;
-  font-size: 4.5vw;
-  background-color: yellow;
-  border: solid;
+#gameOver {
+  background-color: #bdbdbd;
+  background-image: url("wood-pattern.png");
 }
 #footer {
   grid-area: footer;
   background-color: #666666;
   color: #111111;
 }
-#difficulty-set {
-}
 
 @media (orientation: landscape) {
+  ul {
+    padding-left: 20px;
+  }
   main {
     display: grid;
     height: 100vh;
     grid-template-areas: "left board right" "footer footer footer";
     grid-template-columns: minmax(15px, 1fr) 95vh minmax(15px, 1fr);
     grid-template-rows: 95vh 5vh;
+  }
+  .radioButtons {
+    margin-top: 10px;
   }
   #board {
     grid-row: 1/2;
@@ -106,14 +102,25 @@ body {
     top: 10vh;
     width: 80vw;
     height: 80vh;
-    background-color: maroon;
     overflow: hidden;
   }
   #introduction {
     grid-area: introduction;
-    padding: 5%;
-    background-color: orange;
-    border: solid;
+    display: grid;
+    grid-template-areas: "instructions diff-set";
+    gap: 35px;
+    padding: 3%;
+  }
+  #instructions {
+    grid-area: instructions;
+    font-size: calc(2vh + 0.4vw);
+  }
+  #difficulty-set {
+    grid-area: diff-set;
+    font-size: calc(2vh + 0.6vw);
+  }
+  #customValueInput {
+    font-size: calc(2vh + 0.6vw);
   }
   #play {
     grid-area: play;
@@ -131,7 +138,18 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: cyan;
+  }
+  #points {
+    grid-area: points;
+    text-align: center;
+    align-self: center;
+    font-size: 4.5vw;
+  }
+  #difficulty-info {
+    grid-area: difficulty-info;
+    text-align: center;
+    align-self: center;
+    font-size: 4.5vw;
   }
   #footer {
     grid-row: 2/3;
@@ -146,6 +164,12 @@ body {
     grid-template-areas: "board board" "left right" "footer footer";
     grid-template-columns: 50vw 50vw;
     grid-template-rows: 100vw 1fr 5vh;
+  }
+  .radioButtons {
+    margin-top: 8px;
+  }
+  .logo {
+    font-size: 9.5vh;
   }
   #board {
     width: 100vw;
@@ -178,14 +202,18 @@ body {
     top: 10vh;
     width: 80vw;
     height: 80vh;
-    background-color: maroon;
     overflow: hidden;
   }
   #introduction {
     grid-area: introduction;
-    padding: 5%;
-    background-color: orange;
-    border: solid;
+    padding: 3%;
+  }
+  #instructions,
+  #difficulty-set {
+    font-size: calc(1.9vh - 0.3vw);
+  }
+  #customValueInput {
+    font-size: calc(1.9vh - 0.3vw);
   }
   #play {
     grid-area: play;
@@ -200,7 +228,18 @@ body {
     top: 0;
     width: 80vw;
     height: 80vh;
-    background-color: cyan;
+  }
+  #points {
+    grid-area: points;
+    text-align: center;
+    align-self: center;
+    font-size: 4.5vh;
+  }
+  #difficulty-info {
+    grid-area: difficulty-info;
+    text-align: center;
+    align-self: center;
+    font-size: 4.5vh;
   }
 }
 @keyframes slideOut {

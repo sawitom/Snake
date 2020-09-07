@@ -251,9 +251,11 @@ function createBreakPointRight() {
 }
 function gameOver() {
   const points = document.getElementById("points");
-  //const time = document.getElementById("time");
-  points.innerHTML = `You earned ${score} points.`;
-  //time.innerHTML = `Play time: ${String(timer).replace(".", ",")} seconds.`;
+  const difficultyInfo = document.getElementById("difficulty-info");
+  score == 1
+    ? (points.innerHTML = `Score: ${score} point`)
+    : (points.innerHTML = `Score: ${score} points`);
+  difficultyInfo.innerHTML = `Difficulty: ${getDifficultyInfo()}`;
   const board = document.getElementById("board");
   const gameOver = document.getElementById("gameOver");
   board.style.animation = "addBlur 1s ease 0s 1 forwards";
@@ -262,6 +264,35 @@ function gameOver() {
   gameOver.style.animation = "slideBackIn 0s ease 0s 1 forwards";
   gameOver.style.display = "grid";
   setTimeout(showInfo, 500);
+}
+function getDifficultyInfo() {
+  let difficulty = document.querySelector("input[name='diff']:checked").value;
+  let difficultyInfo;
+  switch (difficulty) {
+    case "1":
+      difficultyInfo = "Easy";
+      //difficultyInfo = document.getElementById("easyLabel").innerHTML;
+      break;
+    case "2":
+      difficultyInfo = "Medium";
+      //difficultyInfo = document.getElementById("mediumLabel").innerHTML;
+      break;
+    case "5":
+      difficultyInfo = "Hard";
+      //difficultyInfo = document.getElementById("hardLabel").innerHTML;
+      break;
+    case "custom":
+      difficultyInfo = "Custom";
+      //customInputValue = document.querySelector("input[name='customInput']")
+      //  .value;
+      //customInputValue == 1
+      //  ? (difficultyInfo = `Custom – ${customInputValue} move per second`)
+      //  : (difficultyInfo = `Custom – ${customInputValue} moves per second`);
+      break;
+    default:
+      difficultyInfo = "Unable to get diificulty level";
+  }
+  return difficultyInfo;
 }
 function hideSnakeAndFruit() {
   for (let i = 0; i < dotsNumber; i++) {
@@ -300,6 +331,7 @@ function showInfo() {
 const playButton = document.getElementById("play");
 const restartButton = document.getElementById("restart");
 const menuButton = document.getElementById("menu");
+const customValueInput = document.getElementById("customValueInput");
 playButton.addEventListener("click", () => {
   hideInfo();
   hideSnakeAndFruit();
@@ -317,6 +349,9 @@ restartButton.addEventListener("click", () => {
 menuButton.addEventListener("click", () => {
   document.getElementById("gameOver").style.animation =
     "slideOut 0.5s ease 0s 1 forwards";
+});
+customValueInput.addEventListener("click", () => {
+  document.getElementById("custom").checked = "true";
 });
 const dotsNumber = 400;
 let snakeIds;
