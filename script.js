@@ -249,6 +249,10 @@ function createBreakPointRight() {
   }
 }
 function gameOver() {
+  //disable pointer events
+  leftButton.style.pointerEvents = "none";
+  rightButton.style.pointerEvents = "none";
+  //show results
   const points = document.getElementById("points");
   const difficultyInfo = document.getElementById("difficulty-info");
   score == 1
