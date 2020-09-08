@@ -9,7 +9,7 @@ body {
 #board {
   filter: blur(2px);
   pointer-events: none;
-  background-color: blueviolet;
+  background-image: url("dark-sand.jpg");
 }
 #goLeft {
   pointer-events: none;
