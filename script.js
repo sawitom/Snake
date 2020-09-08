@@ -12,7 +12,7 @@ function drawBoard() {
 }
 function resetBoard() {}
 function game() {
-  timer = 0;
+  breakPoints = [];
   score = 0;
   const intervalTime = chooseDifficulty();
   const gameState = {
@@ -55,7 +55,6 @@ function game() {
   }, intervalTime);
 }
 function move(gameState) {
-  timer += 0.5;
   snakeIds.forEach(function (part, index) {
     if (isAboutToCrashWithSelf()) gameState.isOver = true;
     if (!gameState.isOver) {
@@ -355,7 +354,7 @@ customValueInput.addEventListener("click", () => {
 });
 const dotsNumber = 400;
 let snakeIds;
-const breakPoints = [];
+let breakPoints;
 //adding left/right button functionality
 const leftButton = document.getElementById("goLeft");
 leftButton.addEventListener("click", createBreakPointLeft);

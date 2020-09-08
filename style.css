@@ -18,6 +18,15 @@ body {
 #goRight {
   pointer-events: none;
 }
+.menuButtons {
+  background: darkgreen;
+  border-radius: 10px;
+  border: none;
+  color: lightgreen;
+  font-size: 6vh;
+  margin: 10px;
+  cursor: pointer;
+}
 #stats {
   grid-area: stats;
   display: grid;
@@ -26,22 +35,28 @@ body {
 }
 .logo {
   display: flex;
+  justify-content: space-around;
   height: 100%;
+  font-size: 11vw;
+  color: lightgreen;
+  text-shadow: 2px 2px 4px #000000;
   grid-area: logo;
-  align-items: center;
-  justify-content: center;
-  font-size: 12vw;
-  border-bottom: solid;
-  background-color: #838584;
+  border-bottom: solid black;
+  background-color: darkgreen;
   background-image: url("wood-pattern.png");
+}
+.logoSpan {
+  text-align: center;
+  align-self: center;
 }
 #info {
   border: solid;
-  background-color: #bdbdbd;
+  border-radius: 10px;
+  background-color: lightgreen;
   background-image: url("wood-pattern.png");
 }
 #gameOver {
-  background-color: #bdbdbd;
+  background-color: lightgreen;
   background-image: url("wood-pattern.png");
 }
 #footer {
