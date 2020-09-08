@@ -235,10 +235,10 @@ input[type="radio"] {
   }
   #instructions,
   #difficulty-set {
-    font-size: calc(1.9vh - 0.6vw);
+    font-size: calc(1.9vh - 0.5vw);
   }
   #customValueInput {
-    font-size: calc(1.9vh - 0.6vw);
+    font-size: calc(1.9vh - 0.5vw);
   }
   #play {
     grid-area: play;
