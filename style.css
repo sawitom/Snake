@@ -61,8 +61,11 @@ body {
 }
 #footer {
   grid-area: footer;
-  background-color: #666666;
-  color: #111111;
+  display: flex;
+  align-items: center;
+  padding-left: 4%;
+  background-color: darkgreen;
+  color: lightgreen;
 }
 
 @media (orientation: landscape) {
@@ -128,14 +131,14 @@ body {
   }
   #instructions {
     grid-area: instructions;
-    font-size: calc(2vh + 0.4vw);
+    font-size: calc(2vh + 0.35vw);
   }
   #difficulty-set {
     grid-area: diff-set;
-    font-size: calc(2vh + 0.6vw);
+    font-size: calc(2vh + 0.5vw);
   }
   #customValueInput {
-    font-size: calc(2vh + 0.6vw);
+    font-size: calc(2vh + 0.5vw);
   }
   #play {
     grid-area: play;
@@ -225,10 +228,10 @@ body {
   }
   #instructions,
   #difficulty-set {
-    font-size: calc(1.9vh - 0.3vw);
+    font-size: calc(1.9vh - 0.35vw);
   }
   #customValueInput {
-    font-size: calc(1.9vh - 0.3vw);
+    font-size: calc(1.9vh - 0.35vw);
   }
   #play {
     grid-area: play;
