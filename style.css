@@ -34,6 +34,14 @@ input[type="radio"] {
   margin-top: -1px;
   vertical-align: middle;
 }
+.navButtons {
+  background-color: grey;
+  background-image: url("wood-pattern.png");
+  color: darkgreen;
+  border: none;
+  cursor: pointer;
+  filter: blur(2px);
+}
 #stats {
   grid-area: stats;
   display: grid;
@@ -89,6 +97,9 @@ input[type="radio"] {
   .radioButtons {
     margin-top: 10px;
   }
+  .navButtons {
+    font-size: 13vw;
+  }
   #board {
     grid-row: 1/2;
     grid-column: 2/3;
@@ -105,17 +116,11 @@ input[type="radio"] {
     grid-row: 1/2;
     grid-column: 1/2;
     grid-area: left;
-    background-color: lightgray;
-    text-align: center;
-    filter: blur(2px);
   }
   #goRight {
     grid-row: 1/2;
     grid-column: 3/4;
     grid-area: right;
-    background-color: lightgray;
-    text-align: center;
-    filter: blur(2px);
   }
   #info {
     display: grid;
@@ -193,6 +198,9 @@ input[type="radio"] {
   .radioButtons {
     margin-top: 1vh;
   }
+  .navButtons {
+    font-size: 15vh;
+  }
   .logo {
     font-size: 9.5vh;
   }
@@ -205,17 +213,11 @@ input[type="radio"] {
   }
   #goLeft {
     grid-area: left;
-    background-color: lightgray;
-    justify-content: center;
-    text-align: center;
-    /*filter: blur(2px);*/
+    border-right: darkgreen solid 2px;
   }
   #goRight {
     grid-area: right;
-    background-color: lightgray;
-    justify-content: center;
-    text-align: center;
-    filter: blur(2px);
+    border-left: darkgreen solid 2px;
   }
   #info {
     display: grid;
