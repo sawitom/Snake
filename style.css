@@ -135,10 +135,10 @@ body {
   }
   #difficulty-set {
     grid-area: diff-set;
-    font-size: calc(2vh + 0.5vw);
+    font-size: calc(2vh + 0.4vw);
   }
   #customValueInput {
-    font-size: calc(2vh + 0.5vw);
+    font-size: calc(2vh + 0.4vw);
   }
   #play {
     grid-area: play;
@@ -228,10 +228,10 @@ body {
   }
   #instructions,
   #difficulty-set {
-    font-size: calc(1.9vh - 0.35vw);
+    font-size: calc(1.9vh - 0.4vw);
   }
   #customValueInput {
-    font-size: calc(1.9vh - 0.35vw);
+    font-size: calc(1.9vh - 0.4vw);
   }
   #play {
     grid-area: play;
