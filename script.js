@@ -261,9 +261,9 @@ function gameOver() {
   difficultyInfo.innerHTML = `Difficulty: ${getDifficultyInfo()}`;
   const board = document.getElementById("board");
   const gameOver = document.getElementById("gameOver");
-  board.style.animation = "addBlur 1s ease 0s 1 forwards";
-  leftButton.style.animation = "addBlur 1s ease 0s 1 forwards";
-  rightButton.style.animation = "addBlur 1s ease 0s 1 forwards";
+  board.style.animation = "darken 1s ease 0s 1 forwards";
+  leftButton.style.animation = "darken 1s ease 0s 1 forwards";
+  rightButton.style.animation = "darken 1s ease 0s 1 forwards";
   gameOver.style.animation = "slideBackIn 0s ease 0s 1 forwards";
   gameOver.style.display = "grid";
   setTimeout(showInfo, 500);
@@ -321,9 +321,9 @@ const info = document.getElementById("info");
 function hideInfo() {
   const board = document.getElementById("board");
   info.style.animation = "slideOut 0.5s ease 0s 1 forwards";
-  board.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
-  leftButton.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
-  rightButton.style.animation = "removeBlur 0.25s ease 0.75s 1 forwards";
+  board.style.animation = "lighten 0.5s ease 0s 1 forwards";
+  leftButton.style.animation = "lighten 0.5s ease 0s 1 forwards";
+  rightButton.style.animation = "lighten 0.5s ease 0s 1 forwards";
   leftButton.style.pointerEvents = "auto";
   rightButton.style.pointerEvents = "auto";
 }

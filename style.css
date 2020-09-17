@@ -7,19 +7,20 @@ body {
   pointer-events: none;
 }
 #board {
-  filter: blur(2px);
+  filter: brightness(40%);
   pointer-events: none;
-  background-image: url("dark-sand.jpg");
+  background-image: url("wood_bg.png");
 }
 input[type="button"] {
   outline: none;
 }
 #goLeft {
   pointer-events: none;
+  filter: brightness(40%);
 }
-
 #goRight {
   pointer-events: none;
+  filter: brightness(40%);
 }
 .menuButtons {
   background: darkgreen;
@@ -55,7 +56,7 @@ input[type="radio"] {
   display: flex;
   justify-content: space-around;
   height: 100%;
-  font-size: 11vw;
+  font-size: 22vh;
   color: lightgreen;
   text-shadow: 2px 2px 4px #000000;
   grid-area: logo;
@@ -205,7 +206,7 @@ input[type="radio"] {
     font-size: 15vh;
   }
   .logo {
-    font-size: 9.5vh;
+    font-size: 9vh;
   }
   #board {
     width: 100vw;
@@ -296,20 +297,20 @@ input[type="radio"] {
     transform: translateY(0);
   }
 }
-@keyframes removeBlur {
+@keyframes lighten {
   0% {
-    filter: blur(2px);
+    filter: brightness(40%);
   }
   100% {
-    filter: blur(0);
+    filter: brightness(100%);
   }
 }
-@keyframes addBlur {
+@keyframes darken {
   0% {
-    filter: blur(0);
+    filter: brightness(100%);
   }
   100% {
-    filter: blur(2px);
+    filter: brightness(40%);
   }
 }
 @keyframes hideItem {
