@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": "..\\Guess the Number - The Game"
+	},
+	{
+		"path": "."
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "Snake"
+  }
+}
