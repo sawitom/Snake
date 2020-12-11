@@ -1,3 +1,1 @@
-Snake
-
-Check out sawitom.github.io/snake
+Check out <strong><a href="sawitom.github.io/snake">sawitom.github.io/snake</a></strong>
