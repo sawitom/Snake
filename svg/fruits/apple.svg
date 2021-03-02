@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 907 907" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-24,-68)">
+        <g id="apple" transform="matrix(1.92118,0,0,1.82652,-210.384,-270.685)">
+            <g id="leaf-twig" serif:id="leaf&amp;twig" transform="matrix(1,0,0,1,0,29)">
+                <g id="twig" transform="matrix(1,0,0,1,2,13)">
+                    <path d="M342,255C341.055,199.054 365.729,167.778 405,145C417.998,137.461 435.787,159.934 423,168C392.132,187.472 372.968,214.1 372,255C371.544,274.271 342.277,271.388 342,255Z" style="fill:rgb(85,28,14);"/>
+                </g>
+                <g id="leaf" transform="matrix(0.914887,0.40371,-0.40371,0.914887,123.23,-48.6961)">
+                    <path d="M150,170C192.58,244.795 276.577,255.186 332,203C305.602,137.438 222.849,105.443 150,170Z" style="fill:rgb(0,105,6);"/>
+                </g>
+            </g>
+            <g id="body">
+                <path d="M358,307C453.133,239.194 580.37,282.578 593.443,435.29C593.868,440.25 593.972,445.234 593.754,450.209C585.931,626.221 441.923,729.273 362,659C264.346,733.522 132.146,616.921 122.31,451.198C122.048,446.718 122.047,442.225 122.306,437.745C129.818,307.622 238.074,230.996 358,307Z" style="fill:rgb(255,0,0);"/>
+                <path d="M154,425C164.514,358.516 194.771,315.267 253,308C272.557,305.559 273.311,332.611 257,335C212.399,341.531 189.434,375.148 181,427C177.454,448.802 150.691,445.924 154,425Z" style="fill:white;"/>
+            </g>
+        </g>
+    </g>
+</svg>

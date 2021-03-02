@@ -3,14 +3,12 @@ function drawBoard() {
     const newDiv = document.createElement("div");
     newDiv.setAttribute("class", "dot");
     newDiv.setAttribute("id", i);
-    //const marker = document.createTextNode(i);
-    //newDiv.appendChild(marker);
 
     const currentDiv = document.getElementById("board");
     currentDiv.appendChild(newDiv);
   }
 }
-function resetBoard() {}
+//function resetBoard() {}
 function game() {
   breakPoints = [];
   score = 0;
@@ -40,6 +38,7 @@ function game() {
         if (id == null) {
           score++;
           this.fruit = [false, id];
+          // document.getElementById(this.fruit[1]).className = "dot";
           addFruit(this);
         } else alert("FRUIT ERROR #1"); //adding new id to existing fruit
       } else {
@@ -48,19 +47,20 @@ function game() {
       }
     },
   };
-  recolor();
+  snakeIds.forEach((part, index) => recolor(part, index));
   addFruit(gameState);
   const snakeTimer = setInterval(() => {
     move(gameState);
   }, intervalTime);
 }
 function move(gameState) {
+  if (isAboutToCrashWithSelf()) gameState.isOver = true;
+  let fruitEaten = false;
   snakeIds.forEach(function (part, index) {
-    if (isAboutToCrashWithSelf()) gameState.isOver = true;
     if (!gameState.isOver) {
-      //console.log(gameState.isOver);
       //switching direction
       changeDirection(part, index);
+      removeColors(part); //dotąd git
       //moving
       if (
         (part.id % 20 == 19 && part.nextMove == "right") ||
@@ -70,49 +70,36 @@ function move(gameState) {
       ) {
         gameState.isOver = true;
       } else {
-        removeColors();
         switch (part.nextMove) {
           case "right":
-            this[index].id++;
+            part.id++;
             break;
           case "left":
-            this[index].id--;
+            part.id--;
             break;
           case "up":
-            this[index].id -= 20;
+            part.id -= 20;
             break;
           case "down":
-            this[index].id += 20;
+            part.id += 20;
             break;
         }
-
         if (index == 0 && part.id == gameState.fruitId) {
+          document.getElementById(gameState.fruitId).classList.remove("fruit");
           gameState.fruitId = null;
           tailLengthen();
+          fruitEaten = true;
         }
-        //recolor();
-        //console.log("ruch");
-      }
-    } else if (isAboutToCrashWithSelf()) {
-      const head = snakeIds[0];
-      switch (head.nextMove) {
-        case "right":
-          head.id--;
-          break;
-        case "left":
-          head.id++;
-          break;
-        case "up":
-          head.id += 20;
-          break;
-        case "down":
-          head.id -= 20;
-          break;
       }
     }
-    recolor();
+    setBreakPointIndex(part);
+    recolor(part, index);
   }, snakeIds);
-  //colorAllBreakpoints();
+  //recolor tail if fruit was eaten this iteration
+  if (fruitEaten) {
+    recolor(snakeIds[snakeIds.length - 1], snakeIds.length - 1);
+    fruitEaten = false;
+  }
 }
 function changeDirection(part, index) {
   breakPoints.forEach((bp) => {
@@ -152,28 +139,40 @@ function changeDirection(part, index) {
           break;
       }
       // deleting used breakpoints
-      if (index == snakeIds.length - 1) breakPoints.shift();
+      if (index === snakeIds.length - 1) breakPoints.shift();
     }
   }, breakPoints);
+}
+function setBreakPointIndex(snakeElement) {
+  if (breakPoints.length > 0) {
+    for (let i = 0; i < breakPoints.length; i++) {
+      if (breakPoints[i].id === snakeElement.id) {
+        snakeElement.breakPointIndex = i;
+        break;
+      } else snakeElement.breakPointIndex = null;
+    }
+  } else {
+    snakeElement.breakPointIndex = null;
+  }
 }
 function isAboutToCrashWithSelf() {
   const head = snakeIds[0];
   switch (head.nextMove) {
     case "right":
-      for (let i = 1; i < snakeIds.length; i++)
-        if (head.id == snakeIds[i].id) return true;
+      for (let i = 1; i < snakeIds.length - 1; i++)
+        if (head.id + 1 === snakeIds[i].id) return true;
       return false;
     case "left":
       for (let i = 1; i < snakeIds.length - 1; i++)
-        if (head.id == snakeIds[i].id) return true;
+        if (head.id - 1 === snakeIds[i].id) return true;
       return false;
     case "up":
       for (let i = 1; i < snakeIds.length - 1; i++)
-        if (head.id == snakeIds[i].id) return true;
+        if (head.id - 20 === snakeIds[i].id) return true;
       return false;
     case "down":
       for (let i = 1; i < snakeIds.length - 1; i++)
-        if (head.id == snakeIds[i].id) return true;
+        if (head.id + 20 === snakeIds[i].id) return true;
       return false;
   }
 }
@@ -184,24 +183,48 @@ function addFruit(gameState) {
   }
   const randomId = Math.floor(Math.random() * possibleIds.length);
   const newFruitId = possibleIds[randomId];
-  document.getElementById(newFruitId).style.backgroundColor = "red";
+  document.getElementById(newFruitId).className = "fruit";
   gameState.fruitId = newFruitId;
 }
 function tailLengthen() {
   const endDirection = snakeIds[snakeIds.length - 1].nextMove;
+  const endBpIndex = snakeIds[snakeIds.length - 1].breakPointIndex;
   const endId = snakeIds[snakeIds.length - 1].id;
-  snakeIds.push({ id: endId, nextMove: endDirection });
-}
-function removeColors() {
-  snakeIds.forEach((item) => {
-    document.getElementById(item.id).style.backgroundColor = "";
+  snakeIds.push({
+    id: endId,
+    breakPointIndex: endBpIndex,
+    nextMove: endDirection,
   });
 }
-function recolor() {
-  document.getElementById(snakeIds[0].id).style.backgroundColor = "green";
-  for (let i = 1; i < snakeIds.length; i++) {
-    document.getElementById(snakeIds[i].id).style.backgroundColor =
-      "lightgreen";
+function removeColors(part) {
+  if (part.id === snakeIds[0].id) return;
+  else document.getElementById(part.id).className = "dot";
+}
+function recolor(part, index) {
+  if (index === 0) {
+    //head
+    document.getElementById(part.id).className = "dot head" + part.nextMove;
+  } else if (index === snakeIds.length - 1) {
+    //tail
+    let newClass;
+    if (part.breakPointIndex !== null) {
+      newClass = "dot tail" + snakeIds[index - 1].nextMove;
+    } else {
+      newClass = "dot tail" + part.nextMove;
+    }
+    document.getElementById(part.id).className = newClass;
+  } else {
+    //body
+    let newClass;
+    if (part.breakPointIndex !== null) {
+      newClass =
+        "dot curve" +
+        part.nextMove +
+        breakPoints[part.breakPointIndex].newDirection;
+    } else {
+      newClass = "body" + part.nextMove;
+    }
+    document.getElementById(part.id).className = newClass;
   }
 }
 function chooseDifficulty() {
@@ -210,12 +233,11 @@ function chooseDifficulty() {
     difficulty = document.querySelector("input[name='customInput']").value;
   }
   return 1000 / difficulty;
-  //console.log(difficulty);
 }
 //function used to debug breakpoints
 function colorAllBreakpoints() {
   breakPoints.forEach((bp) => {
-    document.getElementById(bp.id).style.backgroundColor = "orange";
+    document.getElementById(bp.id).className = "breakPoint";
   });
 }
 function createBreakPointLeft() {
@@ -230,7 +252,6 @@ function createBreakPointLeft() {
       .map((item) => item.id)
       .indexOf(snakeIds[0].id);
     breakPoints[indexToChange].newDirection = "left";
-    //console.log(breakPoints[indexToChange].newDirection);
   }
 }
 function createBreakPointRight() {
@@ -245,7 +266,6 @@ function createBreakPointRight() {
       .map((item) => item.id)
       .indexOf(snakeIds[0].id);
     breakPoints[indexToChange].newDirection = "right";
-    //console.log(breakPoints[indexToChange].newDirection);
   }
 }
 function gameOver() {
@@ -274,23 +294,15 @@ function getDifficultyInfo() {
   switch (difficulty) {
     case "1":
       difficultyInfo = "Easy";
-      //difficultyInfo = document.getElementById("easyLabel").innerHTML;
       break;
     case "2":
       difficultyInfo = "Medium";
-      //difficultyInfo = document.getElementById("mediumLabel").innerHTML;
       break;
     case "5":
       difficultyInfo = "Hard";
-      //difficultyInfo = document.getElementById("hardLabel").innerHTML;
       break;
     case "custom":
       difficultyInfo = "Custom";
-      //customInputValue = document.querySelector("input[name='customInput']")
-      //  .value;
-      //customInputValue == 1
-      //  ? (difficultyInfo = `Custom – ${customInputValue} move per second`)
-      //  : (difficultyInfo = `Custom – ${customInputValue} moves per second`);
       break;
     default:
       difficultyInfo = "Unable to get diificulty level";
@@ -300,20 +312,16 @@ function getDifficultyInfo() {
 function hideSnakeAndFruit() {
   for (let i = 0; i < dotsNumber; i++) {
     const current = document.getElementById(i);
-    if (current.style.backgroundColor != "") {
-      current.style.animation = "hideItem 1s ease";
-      setTimeout(() => {
-        current.style.removeProperty("background-color");
-        current.style.removeProperty("animation");
-      }, 1000);
+    if (current.style.className != "dot") {
+      current.className = "dot";
     }
   }
 }
 function setNewSnake() {
   snakeIds = [
-    { id: 210, nextMove: "right" },
-    { id: 209, nextMove: "right" },
-    { id: 208, nextMove: "right" },
+    { id: 210, breakPointIndex: null, nextMove: "right" },
+    { id: 209, breakPointIndex: null, nextMove: "right" },
+    { id: 208, breakPointIndex: null, nextMove: "right" },
   ];
 }
 
@@ -339,14 +347,14 @@ playButton.addEventListener("click", () => {
   hideInfo();
   hideSnakeAndFruit();
   setNewSnake();
-  recolor();
+  snakeIds.forEach((part, index) => recolor(part, index));
   setTimeout(game, 1500);
 });
 restartButton.addEventListener("click", () => {
   hideInfo();
   hideSnakeAndFruit();
   setNewSnake();
-  recolor();
+  snakeIds.forEach((part, index) => recolor(part, index));
   setTimeout(game, 1500);
 });
 menuButton.addEventListener("click", () => {
@@ -372,6 +380,12 @@ document.onkeydown = function (e) {
       break;
     case 39:
       createBreakPointRight();
+      break;
+    case 32: //space
+      e.preventDefault();
+      break;
+    case 13: //enter
+      e.preventDefault();
       break;
   }
 };
