@@ -7,6 +7,7 @@ body {
   pointer-events: none;
   margin: 0;
   padding: 0;
+  border: none;
 }
 .headdown {
   background-image: url(svg/head/head_down.svg);
@@ -75,6 +76,8 @@ body {
   background-color: orange;
 }
 #board {
+  display: grid;
+  gap: 0;
   filter: brightness(40%);
   pointer-events: none;
   background-image: url("wood_bg.png");
@@ -176,9 +179,6 @@ input[type="radio"] {
     grid-row: 1/2;
     grid-column: 2/3;
     grid-area: board;
-    /*width: 100vh;
-    height: 100vh;*/
-    display: grid;
     grid-template-columns: repeat(20, 4.75vh);
     grid-template-rows: repeat(20, 4.75vh);
 
@@ -279,7 +279,6 @@ input[type="radio"] {
   #board {
     width: 100vw;
     height: 100vw;
-    display: grid;
     grid-template-columns: repeat(20, 5vw);
     grid-template-rows: repeat(20, 5vw);
   }
