@@ -60,7 +60,7 @@ function move(gameState) {
     if (!gameState.isOver) {
       //switching direction
       changeDirection(part, index);
-      removeColors(part); //dotąd git
+      removeColors(part);
       //moving
       if (
         (part.id % 20 == 19 && part.nextMove == "right") ||
