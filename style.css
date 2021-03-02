@@ -8,69 +8,90 @@ body {
   margin: 0;
   padding: 0;
   border: none;
+  background-size: 100% 100%;
 }
 .headdown {
   background-image: url(svg/head/head_down.svg);
+  background-size: 100% 100%;
 }
 .headup {
   background-image: url(svg/head/head_up.svg);
+  background-size: 100% 100%;
 }
 .headleft {
   background-image: url(svg/head/head_left.svg);
+  background-size: 100% 100%;
 }
 .headright {
   background-image: url(svg/head/head_right.svg);
+  background-size: 100% 100%;
 }
 .bodydown {
   background-image: url(svg/body/body_down.svg);
+  background-size: 100% 100%;
 }
 .bodyup {
   background-image: url(svg/body/body_up.svg);
+  background-size: 100% 100%;
 }
 .bodyleft {
   background-image: url(svg/body/body_left.svg);
+  background-size: 100% 100%;
 }
 .bodyright {
   background-image: url(svg/body/body_right.svg);
+  background-size: 100% 100%;
 }
 .taildown {
   background-image: url(svg/tail/tail_down.svg);
+  background-size: 100% 100%;
 }
 .tailup {
   background-image: url(svg/tail/tail_up.svg);
+  background-size: 100% 100%;
 }
 .tailleft {
   background-image: url(svg/tail/tail_left.svg);
+  background-size: 100% 100%;
 }
 .tailright {
   background-image: url(svg/tail/tail_right.svg);
+  background-size: 100% 100%;
 }
 .curvedownleft {
   background-image: url(/svg/curve_dark/curve_dark_right.svg);
+  background-size: 100% 100%;
 }
 .curveupleft {
   background-image: url(/svg/curve_dark/curve_dark_left.svg);
+  background-size: 100% 100%;
 }
 .curveleftleft {
   background-image: url(/svg/curve_dark/curve_dark_down.svg);
+  background-size: 100% 100%;
 }
 .curverightleft {
   background-image: url(/svg/curve_dark/curve_dark_up.svg);
+  background-size: 100% 100%;
 }
 .curvedownright {
   background-image: url(/svg/curve_light/curve_light_left.svg);
+  background-size: 100% 100%;
 }
 .curveupright {
   background-image: url(/svg/curve_light/curve_light_right.svg);
+  background-size: 100% 100%;
 }
 .curveleftright {
   background-image: url(/svg/curve_light/curve_light_up.svg);
+  background-size: 100% 100%;
 }
 .curverightright {
   background-image: url(/svg/curve_light/curve_light_down.svg);
+  background-size: 100% 100%;
 }
 .fruit {
-  background-image: url(/svg/fruits/apple2.svg);
+  background-image: url(/svg/fruits/apple.svg);
 }
 .breakPoint {
   background-color: orange;
@@ -80,7 +101,8 @@ body {
   gap: 0;
   filter: brightness(40%);
   pointer-events: none;
-  background-image: url("wood_bg.png");
+  background-color: #e59200;
+  background-image: url("/background/sand.png");
 }
 input[type="button"] {
   outline: none;
