@@ -54,51 +54,92 @@ function game() {
   }, intervalTime);
 }
 function move(gameState) {
-  if (isAboutToCrashWithSelf()) gameState.isOver = true;
   let fruitEaten = false;
   snakeIds.forEach(function (part, index) {
-    if (!gameState.isOver) {
-      //switching direction
-      changeDirection(part, index);
-      removeColors(part);
-      //moving
-      if (
-        (part.id % 20 == 19 && part.nextMove == "right") ||
-        (part.id % 20 == 00 && part.nextMove == "left") ||
-        (part.id >= 0 && part.id <= 19 && part.nextMove == "up") ||
-        (part.id >= 380 && part.id <= 399 && part.nextMove == "down")
-      ) {
+    //switching direction
+    changeDirection(part, index);
+    if (index === 0) {
+      if (isAboutToCrash()) {
         gameState.isOver = true;
-      } else {
-        switch (part.nextMove) {
-          case "right":
-            part.id++;
-            break;
-          case "left":
-            part.id--;
-            break;
-          case "up":
-            part.id -= 20;
-            break;
-          case "down":
-            part.id += 20;
-            break;
-        }
-        if (index == 0 && part.id == gameState.fruitId) {
-          document.getElementById(gameState.fruitId).classList.remove("fruit");
-          gameState.fruitId = null;
-          tailLengthen();
-          fruitEaten = true;
-        }
       }
     }
-    setBreakPointIndex(part);
-    recolor(part, index);
+    if (!gameState.isOver) {
+      removeColors(part);
+      //moving
+      switch (part.nextMove) {
+        case "right":
+          part.id++;
+          break;
+        case "left":
+          part.id--;
+          break;
+        case "up":
+          part.id -= 20;
+          break;
+        case "down":
+          part.id += 20;
+          break;
+      }
+      if (index == 0 && part.id == gameState.fruitId) {
+        document.getElementById(gameState.fruitId).classList.remove("fruit");
+        gameState.fruitId = null;
+        tailLengthen();
+        fruitEaten = true;
+      }
+      setBreakPointIndex(part);
+      recolor(part, index);
+    }
   }, snakeIds);
   //recolor tail if fruit was eaten this iteration
   if (fruitEaten) {
     recolor(snakeIds[snakeIds.length - 1], snakeIds.length - 1);
     fruitEaten = false;
+  }
+}
+function changeDirectionsOfAll() {
+  if (breakPoints.length > 0) {
+    breakPoints.forEach((bp) => {
+      snakeIds.forEach((part, index) => {
+        if (bp.id == part.id) {
+          switch (bp.newDirection) {
+            case "left":
+              switch (part.nextMove) {
+                case "right":
+                  part.nextMove = "up";
+                  break;
+                case "left":
+                  part.nextMove = "down";
+                  break;
+                case "up":
+                  part.nextMove = "left";
+                  break;
+                case "down":
+                  part.nextMove = "right";
+                  break;
+              }
+              break;
+            case "right":
+              switch (part.nextMove) {
+                case "right":
+                  part.nextMove = "down";
+                  break;
+                case "left":
+                  part.nextMove = "up";
+                  break;
+                case "up":
+                  part.nextMove = "right";
+                  break;
+                case "down":
+                  part.nextMove = "left";
+                  break;
+              }
+              break;
+          }
+          // deleting used breakpoints
+          if (index === snakeIds.length - 1) breakPoints.shift();
+        }
+      });
+    });
   }
 }
 function changeDirection(part, index) {
@@ -153,6 +194,26 @@ function setBreakPointIndex(snakeElement) {
     }
   } else {
     snakeElement.breakPointIndex = null;
+  }
+}
+function isAboutToCrash() {
+  return isAboutToCrashWithSelf() || isAboutToCrashWithWall();
+}
+function isAboutToCrashWithWall() {
+  const head = snakeIds[0];
+  switch (head.nextMove) {
+    case "right":
+      if ((head.id + 1) % 20 === 0 || head.id + 1 > 399) return true;
+      return false;
+    case "left":
+      if ((head.id - 1) % 20 === 19 || head.id - 1 < 0) return true;
+      return false;
+    case "up":
+      if (head.id - 20 < 0) return true;
+      return false;
+    case "down":
+      if (head.id + 20 > 399) return true;
+      return false;
   }
 }
 function isAboutToCrashWithSelf() {

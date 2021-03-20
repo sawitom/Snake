@@ -1,1 +1,6 @@
-<svg viewBox="0 0 105 106" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><g transform="matrix(1.05 0 0 1.05 0 .567)"><clipPath id="a"><path d="M0 0h100v100H0z"/></clipPath><g clip-path="url(#a)"><path fill="#006906" d="M0 100V0h100v100z"/><path fill="#00a409" d="M-.0001 100.0002v-50h100v50z"/></g></g></svg>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <rect stroke="null" height="50" width="100" y="0" x="0" fill="#006906" />
+        <rect stroke="null" height="50" width="100" y="50" x="0" fill="#00a409" />
+    </g>
+</svg>

@@ -1,1 +1,23 @@
-<svg viewBox="0 0 105 106" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><g transform="matrix(0 1.05 -1.05 0 105 .528)"><clipPath id="a"><path d="M0 0h100v100H0z"/></clipPath><g clip-path="url(#a)"><path d="M100 50c0-12.2595-45.9915-33.537-70.3135-43.9325A75.7493 75.7493 0 000 .0075V0v100a75.7555 75.7555 0 0029.6895-6.0605C54.0085 83.537 100 62.2595 100 50z" fill="#006906"/><g transform="matrix(.5 0 0 .5 -433.5 -150)"><clipPath id="b"><path d="M1067 400c0-24.519-91.983-67.074-140.627-87.865A151.4987 151.4987 0 00867 300.015V300v200c20.407 0 40.604-4.123 59.379-12.121C975.017 467.074 1067 424.519 1067 400z"/></clipPath><g clip-path="url(#b)"><path fill="#00a409" d="M867.0006 400h200v100h-200z"/></g></g></g></g></svg>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g transform="matrix(0 1 -1 0 100 0)">
+        <clipPath id="a">
+            <path d="M0 0h100v100H0z" />
+        </clipPath>
+        <g clip-path="url(#a)">
+            <path
+                d="M100 50c0-12.2595-45.9915-33.537-70.3135-43.9325A75.7493 75.7493 0 000 .0075V0v100a75.7555 75.7555 0 0029.6895-6.0605C54.0085 83.537 100 62.2595 100 50z"
+                fill="#006906" />
+            <g transform="matrix(.5 0 0 .5 -433.5 -150)">
+                <clipPath id="b">
+                    <path
+                        d="M1067 400c0-24.519-91.983-67.074-140.627-87.865A151.4987 151.4987 0 00867 300.015V300v200c20.407 0 40.604-4.123 59.379-12.121C975.017 467.074 1067 424.519 1067 400z" />
+                </clipPath>
+                <g clip-path="url(#b)">
+                    <!-- <path stroke="black" fill="#8300a4" d="M10 10, Q50 50, 0 100" /> -->
+                    <path fill="#00a409" d="M867.0006 400h200v100h-200z" />
+
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
