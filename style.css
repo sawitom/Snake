@@ -3,6 +3,9 @@ body {
   padding: 0;
   overflow: hidden;
 }
+div#preload {
+  display: none;
+}
 .dot {
   pointer-events: none;
   margin: 0;
